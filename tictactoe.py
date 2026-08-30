@@ -7,24 +7,45 @@ complete = False
 turn = 0
 prev_turn = -1
 
-while playing:
-    os.system('cls' if os.name == 'nt' else 'clear')
+def player_input(spots, turn, prev_turn):
+    """Handles clearing the screen, displaying the board, getting user input,
+
+    and updating the game state for a single turn.
+
+    """
+    os.system("cls" if os.name == "nt" else "clear")
     display_board(spots)
+
     if prev_turn == turn:
         print("invalid spot, please pick again")
+
     prev_turn = turn
-    print("Player " + str((turn % 2) + 1 ) + "'s turn: Pick your spot or press q to quit")
+    print(
+        "Player "
+        + str((turn % 2) + 1)
+        + "'s turn: Pick your spot or press q to quit"
+    )
+
     choice = input("Enter your choice: ")
+
+    playing = True
+    complete = False
+
     if str.isdigit(choice) and int(choice) in spots:
-        if not spots[int(choice)] in {"X", "O"}:
-            #update the board if valid input
+        if spots[int(choice)] not in {"X", "O"}:
+            # Update the board if valid input
             turn += 1
             spots[int(choice)] = check_turn(turn)
-    elif choice == 'q':
+    elif choice == "q":
         playing = False
-    if check_win(spots): playing, complete = False, True
+
+    if check_win(spots):
+        playing, complete = False, True
+
     if turn > 8:
         playing = False
+
+    return spots, turn, prev_turn, playing, complete
 os.system('cls' if os.name == 'nt' else 'clear')
 display_board(spots)
 
