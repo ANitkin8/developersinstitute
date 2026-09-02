@@ -23,6 +23,7 @@ def pick_number(number):
 
     else:
         print("please enter a number between 1 and 100")
+pick_number()
 #exercise 5
 def make_shirt(size="large", text="I love Python"):
     print(f"the size of the shirt is {size} and the text is {text}")
