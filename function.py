@@ -47,6 +47,7 @@ def get_random_temp():
     return random_temp
 def main():
         temp = get_random_temp()
+        pring(f"the temperature right now is {temp} degrees celcius")
         if temp < 0:
             print("Brrr, thats freezing! Wear some extra layers today!")
         elif 0 <= temp <16:
