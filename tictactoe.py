@@ -1,77 +1,70 @@
+ import os
+
 def display_board(spots):
     board = (f"|{spots[1]}|{spots[2]}|{spots[3]}|\n"
                 f"|{spots[4]}|{spots[5]}|{spots[6]}|\n"
                 f"|{spots[7]}|{spots[8]}|{spots[9]}|\n")
     print(board)
 
-def check_turn(turn):
-    if turn % 2 == 0: return 'O'
-    else: return 'X'
-
 def check_win(spots):
-    if (spots[1] == spots[2] == spots[3]) \
-        or (spots[4] == spots[5] == spots[6]) \
-        or (spots[7] == spots[8] == spots[9]):
-        return True
-    elif (spots [1] == spots[4] == spots [7])\
-        or (spots [2] == spots[5] == spots [8])\
-        or (spots [3] == spots[6] == spots [9]):
-        return True
-    elif (spots [1] ==spots[5] == spots [9])\
-        or (spots[3] == spots[5] ==spots [7]):
-        return True
-    else: return False
-import os
-spots = {1 : '1', 2 : '2', 3 : '3', 4 : '4', 5 : '5', 6 : '6', 7 : '7', 8 : '8', 9 : '9'}
+#checks all 8 winning lines
+    wins = [
+    (1,2,3), (4,5,6), (7,8,9),
+    (1,4,7),(2,5,8), (3,6,9),
+    (1,5,9), (3,5,7)
+    ]
+    for a,b,c in wins:
+        if spots[a] == spots[b] == spots[c] and spots[a] in {"X", "O"}:
+            return True
+    return False
 
-playing = True
-complete = False
-turn = 0
-prev_turn = -1
 
-def player_input(spots, turn, prev_turn):
-    """Handles clearing the screen, displaying the board, getting user input,
+def play ():
+    spots = {1 : '1', 2 : '2', 3 : '3', 4 : '4', 5 : '5', 6 : '6', 7 : '7', 8 : '8', 9 : '9'}
+    playing = True
+    turn = 0
+    winner = None
 
-    and updating the game state for a single turn.
+    while playing:
+        os.system('cls' if os.name == 'nt' else 'clear')
+        display_board(spots)
 
-    """
-    os.system("cls" if os.name == "nt" else "clear")
+        current_symbol = 'X' if turn % 2 == 0 else 'O'
+        player_number = 1 if turn % 2 == 0 else 2
+        print(f"\nPlayer {player_number}'s turn.({current_symbol})")
+        choice = input("pick a spot(1-9) or press 'q' to quit: ").strip()
+
+        if choice.lower() == 'q':
+            print("\nGame Over")
+            return
+
+        #input validation
+        if choice.isdigit() and int(choice) in spots:
+            spot_num = int(choice)
+            if sports[spot_num] not in {"X", "O"}:
+                #apply move
+                spots[spot_num] = current_symbol
+
+                #check win
+                if check_win(spots):
+                    winner = current_symbol
+                    playing = False
+                #check tie
+                elif turn == 8:
+                    playing = False
+                turn += 1
+            else:
+                input("spot already taken, enter a new spot and try again")
+        else:
+            input("invalid inpit, enter a new spot and try again")
+
+    os.system('cls' if os.name == 'nt' else 'clear')
     display_board(spots)
 
-    if prev_turn == turn:
-        print("invalid spot, please pick again")
+    if winner:
+        print(f"\nPlayer ({winner} wins!")
+    else:
+        print("\n It's a tie!")
 
-    prev_turn = turn
-    print(
-        "Player "
-        + str((turn % 2) + 1)
-        + "'s turn: Pick your spot or press q to quit"
-    )
-
-    choice = input("Enter your choice: ")
-
-    playing = True
-    complete = False
-
-    if str.isdigit(choice) and int(choice) in spots:
-        if spots[int(choice)] not in {"X", "O"}:
-            # Update the board if valid input
-            turn += 1
-            spots[int(choice)] = check_turn(turn)
-    elif choice == "q":
-        playing = False
-
-    if check_win(spots):
-        playing, complete = False, True
-
-    if turn > 8:
-        playing = False
-
-    return spots, turn, prev_turn, playing, complete
-os.system('cls' if os.name == 'nt' else 'clear')
-display_board(spots)
-
-if complete:
-    print(check_turn(turn) + " wins")
-else:
-    print("Draw")
+if __name__ == "__main__":
+    play()
