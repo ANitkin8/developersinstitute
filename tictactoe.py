@@ -1,4 +1,4 @@
- import os
+import os
 
 def display_board(spots):
     board = (f"|{spots[1]}|{spots[2]}|{spots[3]}|\n"
