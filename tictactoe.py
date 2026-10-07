@@ -41,7 +41,7 @@ def play ():
         #input validation
         if choice.isdigit() and int(choice) in spots:
             spot_num = int(choice)
-            if sports[spot_num] not in {"X", "O"}:
+            if spots[spot_num] not in {"X", "O"}:
                 #apply move
                 spots[spot_num] = current_symbol
 
@@ -50,19 +50,19 @@ def play ():
                     winner = current_symbol
                     playing = False
                 #check tie
-                elif turn == 8:
+                elif turn == 9:
                     playing = False
                 turn += 1
             else:
                 input("spot already taken, enter a new spot and try again")
         else:
-            input("invalid inpit, enter a new spot and try again")
+            input("invalid input, enter a new spot and try again")
 
     os.system('cls' if os.name == 'nt' else 'clear')
     display_board(spots)
 
     if winner:
-        print(f"\nPlayer ({winner} wins!")
+        print(f"\nPlayer {winner} wins!")
     else:
         print("\n It's a tie!")
 
