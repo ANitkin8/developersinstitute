@@ -1,26 +1,26 @@
 #exercise 1
-my_fav_numbers = [8, 13, 18]
-my_fav_numbers.append(17)
-my_fav_numbers.append(33)
-my_fav_numbers.pop(4)
+my_fav_numbers = {8, 13, 18}
+my_fav_numbers.add(17)
+my_fav_numbers.add(33)
+my_fav_numbers.remove(4)
 friend_fav_numbers = [98, 99, 100]
 our_fav_numbers = my_fav_numbers + friend_fav_numbers
 #exercise 2
-my_tuple = (1+3, 2.5, 'data analysis')
-#my_tuple.append('coffee')  this gives an error message
+my_tuple = (1, 5, 8)
+my_tuple.append(7)  #this gives an error message
 #exercise 3
 basket = ["Banana", "Apples", "Oranges", "Blueberries"]
 basket.remove('Banana')
 basket.remove('Blueberries')
 basket.append('kiwi')
 basket.insert(0, 'Apples')
-basket.count("Apples")
+print(basket.count("Apples"))
 basket.clear()
 print(basket)
 #exercise 4
 fruits = []
 i = 1
-while i<5:
+while i<=5:
     i += 0.5
     if i.is_integer():
             fruits.append(int(i))
@@ -30,12 +30,17 @@ print(fruits)
 #exercise 5
 for num in range(1,21):
     print(num)
+for num in range(1,21):
+    if num%2==0:
+        print(num)
 #exercise 6
-name = input('Enter your name:')
-if name.isdigit() or len(name) < 3:
-    name = input('give the correct name:')
-else:
-    print('thank you')
+while True:
+    name = input('Enter your name:')
+    if name.isdigit() or len(name)<3:
+        print("name must be at least 3 letters and not a number")
+    else:
+        print('thank you')
+        break
 #exercise 7
 fav_fruits = []
 print('enter your favorite fruits')
