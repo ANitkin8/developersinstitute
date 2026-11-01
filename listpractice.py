@@ -2,12 +2,13 @@
 my_fav_numbers = {8, 13, 18}
 my_fav_numbers.add(17)
 my_fav_numbers.add(33)
-my_fav_numbers.remove(4)
-friend_fav_numbers = [98, 99, 100]
-our_fav_numbers = my_fav_numbers + friend_fav_numbers
+my_fav_numbers.remove(33)
+friend_fav_numbers = {98, 99, 100}
+our_fav_numbers = my_fav_numbers.union(friend_fav_numbers)
+
 #exercise 2
 my_tuple = (1, 5, 8)
-my_tuple.append(7)  #this gives an error message
+
 #exercise 3
 basket = ["Banana", "Apples", "Oranges", "Blueberries"]
 basket.remove('Banana')
@@ -18,21 +19,20 @@ print(basket.count("Apples"))
 basket.clear()
 print(basket)
 #exercise 4
-fruits = []
-i = 1
+numbers = []
+i = 1.5
 while i<=5:
     i += 0.5
     if i.is_integer():
-            fruits.append(int(i))
+            numbers.append(int(i))
     else:
-            fruits.append(i)
-print(fruits)
+            numbers.append(i)
+print(numbers)
 #exercise 5
 for num in range(1,21):
     print(num)
-for num in range(1,21):
-    if num%2==0:
-        print(num)
+for num in range(1,21,2):
+    print(num)
 #exercise 6
 while True:
     name = input('Enter your name:')
@@ -44,9 +44,8 @@ while True:
 #exercise 7
 fav_fruits = []
 fruits = input('enter your favorite fruits')
-fav_fruits.split(fruits)
-print('name any fruit')
-any_fruit = input()
+fav_fruits = fruits.split()
+any_fruit = input('name any fruit')
 if any_fruit in fav_fruits:
     print("You chose one of your favorite fruits! Enjoy!")
 else:
@@ -54,7 +53,7 @@ else:
 #exercise 8
 toppings = []
 t=1
-while t >0:
+while true:
     topping = input("choose a topping for your pizza (enter quit at anytime to stop)\n")
     if topping != 'quit':
         print(f"Adding {topping} to your pizza.")
