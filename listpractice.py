@@ -43,9 +43,8 @@ while True:
         break
 #exercise 7
 fav_fruits = []
-print('enter your favorite fruits')
-fr = input()
-fav_fruits.append(fr)
+fruits = input('enter your favorite fruits')
+fav_fruits.split(fruits)
 print('name any fruit')
 any_fruit = input()
 if any_fruit in fav_fruits:
@@ -53,15 +52,20 @@ if any_fruit in fav_fruits:
 else:
     print("You chose a new fruit. I hope you enjoy it!")
 #exercise 8
+toppings = []
 t=1
 while t >0:
-    print("choose a topping for your pizza (enter quit at anytime to stop)")
-    topping = input()
+    topping = input("choose a topping for your pizza (enter quit at anytime to stop)\n")
     if topping != 'quit':
         print(f"Adding {topping} to your pizza.")
+        toppings.append(topping)
         continue
     else:
         break
+total_toppings=len(toppings)
+cost= 10+2.5*total_toppings
+print(toppings)
+print(f"your total cost is ${cost}")
 #exercise 9
 ages = []
 total_cost=0
@@ -70,7 +74,7 @@ user_ages = input()
 user_ages.split()
 ages = list(map(int, user_ages.split()))
 for x in ages:
-    if  12>x>3:
+    if   3 <= x <= 12:
         cost = 10
     elif x > 12:
         cost = 15
